@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/05 17:00:51 by tjose             #+#    #+#             */
+/*   Updated: 2017/04/05 17:23:21 by tjose            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
 static int	create_map(t_mapinfo *mapinfo)
@@ -36,12 +48,24 @@ static int	get_map_size(t_mapinfo *mapinfo)
 	return (create_map(mapinfo));
 }
 
-static void	get_piece(char *line, t_mapinfo *mapinfo)
+static int	get_piece(char *line, t_mapinfo *mapinfo)
 {
-	int	height;
-	int	width;
+	int		height;
+	int		width;
+	int		i;
+	char	*piece;
 
-	height = ft_atoi(&line[6])
+	i = 6;
+	height = ft_atoi(&line[i]);
+	while (!ft_iswp(line[i]))
+		i++;
+	width = ft_atoi(&line[++i]);
+	if (!(piece = (char*)malloc(sizeof(char) * (height * width) + 1)))
+		return (0);
+	while (get_next_line(0, *line))
+		piece = ft_strcat(piece, line);
+
+	return (1);
 }
 
 int			get_map(char *line, t_mapinfo *mapinfo)
@@ -55,6 +79,7 @@ int			get_map(char *line, t_mapinfo *mapinfo)
 		ft_strcpy(mapinfo->map[i++], &line[4]);
 	if (line[0] == 'P' && line[1] == 'i')
 	{
-		get_piece(line, mapinfo);
+		if (!get_piece(line, mapinfo))
+			return (0);
 	}	
 }
