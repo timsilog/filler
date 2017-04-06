@@ -4,16 +4,12 @@
 
 typedef struct	s_mapinfo
 {
+	int			player_number;
 	int			height;
 	int			width;
 	char		**map;
-	t_coord		*piece;
+	char		*piece;
 }				t_mapinfo;
-typedef struct	s_coord
-{
-	int			x;
-	int			y;
-}				t_coord;
-int				get_map(char *line, t_mapinfo *mapinfo);
+int				read_info(char *line, t_mapinfo *mapinfo);
 
 #endif

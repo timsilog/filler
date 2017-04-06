@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:51 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/05 17:23:21 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/05 19:25:40 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,25 @@ static int	get_piece(char *line, t_mapinfo *mapinfo)
 
 	i = 6;
 	height = ft_atoi(&line[i]);
-	while (!ft_iswp(line[i]))
+	while (!ft_is_wp(line[i]))
 		i++;
 	width = ft_atoi(&line[++i]);
-	if (!(piece = (char*)malloc(sizeof(char) * (height * width) + 1)))
+	if (!(mapinfo->piece = (char*)malloc(sizeof(char) * (height * width) + 1)))
 		return (0);
 	while (get_next_line(0, *line))
-		piece = ft_strcat(piece, line);
-
+		mapinfo->piece = ft_strcat(piece, line);
 	return (1);
 }
 
-int			get_map(char *line, t_mapinfo *mapinfo)
+static void	get_player_num(char *line, t_mapinfo mapinfo)
 {
+	if 
+}
+
+int			read_info(char *line, t_mapinfo *mapinfo)
+{
+	if (line[0] == '$')
+		get_player_num(line, mapinfo);
 	if (line[0] == 'P' && line[1] == 'l' && !mapinfo->height)
 	{
 		if (!get_map_size(mapinfo))
@@ -81,5 +87,5 @@ int			get_map(char *line, t_mapinfo *mapinfo)
 	{
 		if (!get_piece(line, mapinfo))
 			return (0);
-	}	
+	}
 }

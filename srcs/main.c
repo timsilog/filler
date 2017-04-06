@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/05 17:01:04 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/05 19:16:49 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main()
 	line = malloc(sizeof(char) * 105);
 	while (get_next_line(0, &line))
 	{
-		if (!get_map(line, mapinfo))
+		if (!read_info(line, mapinfo))
 		{
 			ft_printf("Map read error\n");
 			return (-1);
