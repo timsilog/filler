@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/06 19:58:21 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/10 15:24:42 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,38 +31,49 @@ static t_mapinfo	*init_mapinfo(void)
 		return (NULL);
 	mapinfo->height = 0;
 	mapinfo->width = 0;
+	mapinfo->map_read = 0;
 	return (mapinfo);
+}
+
+static void			do_next_piece(t_mapinfo *mapinfo)
+{
+	char	*line;
+	int		read;
+
+	read = 0;
+	while (1)
+	{
+		while (!read)
+		{
+			get_next_line(0, &line);
+			if (!read_info(line, mapinfo))
+			{
+				ft_printf("Map read error\n");
+				return ;
+			}
+			if (line[0] == 'P' && line[1] == 'i')
+				read = 1;
+		}
+		if (!place_piece(mapinfo))
+		{
+			free_the_piece(mapinfo);
+			return ;
+		}
+		free_the_piece(mapinfo);
+		read = 0;
+	}
 }
 
 int					main(void)
 {
-	char		*line;
 	t_mapinfo	*mapinfo;
-	int			read;
 
 	if (!(mapinfo = init_mapinfo()))
 	{
 		ft_printf("Error");
 		return (-1);
 	}
-	read = 0;
-	while (!read)
-	{
-		get_next_line(0, &line);
-		if (!read_info(line, mapinfo))
-		{
-			ft_printf("Map read error\n");
-			return (-1);
-		}
-		ft_putstr_fd(line, 2);
-		ft_putstr_fd("a\n", 2);
-		if (line[0] == 'P' && line[1] == 'i')
-			read = 1;
-	}
-	ft_printf("8 2\n");
-	ft_putstr_fd(mapinfo->piece[0], 2);
-	ft_putstr_fd("<<<", 2);
-	//place_piece(mapinfo);
-	// dont forget to free piece and map!!
+	do_next_piece(mapinfo);
+	free_the_map(mapinfo);
 	return (0);
 }

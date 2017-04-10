@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:51 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/06 19:55:11 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/10 15:17:25 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,22 @@ static void	get_player_num(char *line, t_mapinfo *mapinfo)
 
 int			read_info(char *line, t_mapinfo *mapinfo)
 {
-	int i;
+	static int i;
 
-	i = 0;
-	if (line[0] == '$')
+	if (line[0] == '$' && !mapinfo->map_read)
 		get_player_num(line, mapinfo);
-	if (line[0] == 'P' && line[1] == 'l' && !mapinfo->height)
+	if (line[0] == 'P' && line[1] == 'l' && !mapinfo->height && !mapinfo->map_read)
 	{
 		if (!get_map_size(line, mapinfo))
 			return (0);
+		mapinfo->map_read = 1;
 	}
 	if (line[0] == '0')
+	{
 		ft_strcpy(mapinfo->map[i++], &line[4]);
+		if (i == mapinfo->height)
+			i = 0;
+	}
 	if (line[0] == 'P' && line[1] == 'i')
 	{
 		if (!get_piece(line, mapinfo))
