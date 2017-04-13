@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/10 15:24:42 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/12 16:49:56 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_mapinfo	*init_mapinfo(void)
 	return (mapinfo);
 }
 
-static void			do_next_piece(t_mapinfo *mapinfo)
+static void			play_the_game(t_mapinfo *mapinfo)
 {
 	char	*line;
 	int		read;
@@ -73,7 +73,7 @@ int					main(void)
 		ft_printf("Error");
 		return (-1);
 	}
-	do_next_piece(mapinfo);
+	play_the_game(mapinfo);
 	free_the_map(mapinfo);
 	return (0);
 }

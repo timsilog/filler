@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:32:08 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/10 15:25:03 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/12 16:58:44 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_mapinfo
 	int			map_read;
 	char		**map;
 	char		**piece;
+	char		**heatmap;
 }				t_mapinfo;
 int				read_info(char *line, t_mapinfo *mapinfo);
 int				place_piece(t_mapinfo *info);

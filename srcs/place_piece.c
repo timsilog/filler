@@ -6,12 +6,30 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:39:25 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/10 16:04:21 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/12 16:52:11 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include <unistd.h>
+
+static int	is_safe_spot(t_mapinfo *info, int yy, int xx, int *num_touching)
+{
+	if (yy >= 0 && xx >= 0 && yy < info->height && xx < info->width)
+	{
+		if (info->player_number == 1 && (info->map[yy][xx] == 'o'
+					|| info->map[yy][xx] == 'O'))
+			(*num_touching)++;
+		else if (info->player_number == 2 && (info->map[yy][xx] == 'x'
+							|| info->map[yy][xx] == 'X'))
+			(*num_touching)++;
+		else if (info->map[yy][xx] != '.')
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
+}
 
 static int	is_safe(t_mapinfo *info, int y, int x)
 {
@@ -28,19 +46,7 @@ static int	is_safe(t_mapinfo *info, int y, int x)
 		{
 			if (info->piece[py][px] == '*')
 			{
-				if (y + py >= 0 && x + px >= 0 &&
-						y + py < info->height && x + px < info->width)
-				{
-					if (info->player_number == 1 && (info->map[y + py][x + px] == 'o'
-							|| info->map[y + py][x + px] == 'O'))
-						num_touching++;
-					else if (info->player_number == 2 && (info->map[y + py][x + px] == 'x'
-							|| info->map[y + py][x + px] == 'X'))
-						num_touching++;
-					else if (info->map[y + py][x + px] != '.')
-						return (0);
-				}
-				else
+				if (!is_safe_spot(info, y + py, x + px, &num_touching))
 					return (0);
 			}
 		}
@@ -64,13 +70,10 @@ int			place_piece(t_mapinfo *info)
 			if (is_safe(info, y, x))
 			{
 					ft_printf("%d %d\n", y, x);
-					ft_putstr_fd("i say: ", 2);
-					ft_putstr_fd(ft_itoa(y), 2);
-					ft_putstr_fd(" ", 2);
-					ft_putstr_fd(ft_itoa(x), 2);
 					return (1);
 			}
 		}
 	}
+	ft_printf("-1 -1\n");
 	return (0);
 }

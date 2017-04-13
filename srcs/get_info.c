@@ -6,23 +6,26 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:51 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/10 15:17:25 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/12 16:57:37 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static int	create_map(t_mapinfo *mapinfo)
+static int	create_maps(t_mapinfo *mapinfo)
 {
 	int	i;
 
-	if (!(mapinfo->map = (char**)malloc(sizeof(char*) * mapinfo->height)))
+	mapinfo->heatmap = (char**)malloc(sizeof(char*) * mapinfo->height);
+	mapinfo->map = (char**)malloc(sizeof(char*) * mapinfo->height);
+	if (!mapinfo->heatmap || !mapinfo->map)
 		return (0);
 	i = -1;
 	while (++i < mapinfo->height)
 	{
-		if (!(mapinfo->map[i] = (char*)malloc(sizeof(char)
-						* mapinfo->width + 1)))
+		mapinfo->map[i] = (char*)malloc(sizeof(char) * mapinfo->width + 1);
+		mapinfo->heatmap[i] = (char*)malloc(sizeof(char) * mapinfo->width + 1);	
+		if (!mapinfo->map[i] || !mapinfo->heatmap[i])	
 			return (0);
 	}
 	return (1);
@@ -47,7 +50,7 @@ static int	get_map_size(char *line, t_mapinfo *mapinfo)
 	}
 	else
 		return (0);
-	return (create_map(mapinfo));
+	return (create_maps(mapinfo));
 }
 
 static int	get_piece(char *line, t_mapinfo *mapinfo)
