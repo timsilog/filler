@@ -6,7 +6,7 @@
 #    By: tjose <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/06 15:16:08 by tjose             #+#    #+#              #
-#    Updated: 2017/04/10 14:39:24 by tjose            ###   ########.fr        #
+#    Updated: 2017/04/13 16:07:35 by tjose            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,10 @@ CFLAGS = -Wall -Werror -Wextra
 SRCS = $(addprefix $(SRCDIR), $(SRCFILES))
 OBJS = $(addprefix $(OBJDIR), $(SRCFILES:.c=.o))
 SRCFILES = main.c \
-		   get_info.c \
+		   read_info.c \
 		   place_piece.c \
 		   let_it_go.c \
+		   create_heatmap.c \
 		   debug.c
 SRCDIR = ./srcs/
 OBJDIR = ./objs/

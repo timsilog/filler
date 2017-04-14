@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/12 16:49:56 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/13 17:00:03 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ static t_mapinfo	*init_mapinfo(void)
 		return (NULL);
 	mapinfo->height = 0;
 	mapinfo->width = 0;
-	mapinfo->map_read = 0;
 	return (mapinfo);
 }
 
-static void			play_the_game(t_mapinfo *mapinfo)
+static void			play_the_game(t_mapinfo *info)
 {
 	char	*line;
 	int		read;
@@ -46,34 +45,38 @@ static void			play_the_game(t_mapinfo *mapinfo)
 		while (!read)
 		{
 			get_next_line(0, &line);
-			if (!read_info(line, mapinfo))
+			if (!read_info(line, info))
 			{
 				ft_printf("Map read error\n");
 				return ;
 			}
 			if (line[0] == 'P' && line[1] == 'i')
+			{
 				read = 1;
+				print_heat(info);
+				sleep(3);
+			}
 		}
-		if (!place_piece(mapinfo))
+		if (!place_piece(info))
 		{
-			free_the_piece(mapinfo);
+			free_the_piece(info);
 			return ;
 		}
-		free_the_piece(mapinfo);
+		free_the_piece(info);
 		read = 0;
 	}
 }
 
 int					main(void)
 {
-	t_mapinfo	*mapinfo;
+	t_mapinfo	*info;
 
-	if (!(mapinfo = init_mapinfo()))
+	if (!(info = init_mapinfo()))
 	{
 		ft_printf("Error");
 		return (-1);
 	}
-	play_the_game(mapinfo);
-	free_the_map(mapinfo);
+	play_the_game(info);
+	free_the_map(info);
 	return (0);
 }

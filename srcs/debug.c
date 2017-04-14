@@ -6,11 +6,12 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 14:36:28 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/10 14:44:59 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/13 16:53:45 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+#include <unistd.h>
 //delete this file later!!!
 
 void	print_piece(t_mapinfo *info)
@@ -37,6 +38,23 @@ void	print_map(t_mapinfo *m)
 	while (++i < m->height)
 	{
 		ft_putstr_fd(m->map[i], 2);
+		ft_putstr_fd("\n", 2);
+	}
+}
+
+void	print_heat(t_mapinfo *m)
+{
+	int i = -1;
+	int j;
+	ft_putstr_fd(">HEAT:\n", 2);
+	while (++i < m->height)
+	{
+		j = -1;
+		while (++j < m->width)
+		{
+			ft_putstr_fd(ft_itoa((int)m->heatmap[i][j]), 2);
+			ft_putstr_fd(" ", 2);
+		}
 		ft_putstr_fd("\n", 2);
 	}
 }
