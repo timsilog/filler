@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:39:25 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/12 16:52:11 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/17 16:54:40 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,60 @@ static int	is_safe(t_mapinfo *info, int y, int x)
 					return (0);
 			}
 		}
+
 	}
 	if (num_touching != 1)
 		return (0);
 	return (1);
 }
 
+static int	get_heat_sum(t_mapinfo *info, int y, int x)
+{
+	int	i;
+	int	j;
+	int	sum;
+
+	sum = 0;
+	i = -1;
+	while (++i < info->p_hei)
+	{
+		j = -1;
+		while (++j < info->p_wid)
+		{
+			if (info->piece[i][j] == '*')
+				sum += info->heatmap[i + y][j + x];	
+		}
+	}
+	return (sum);
+}
+
+static void	update_lowest(int lowest[3], t_mapinfo *info, int y, int x)
+{
+	int	temp;
+
+	temp = get_heat_sum(info, y, x);
+	if (temp < lowest[0])
+	{
+		lowest[0] = temp;
+		lowest[1] = y;
+		lowest[2] = x;
+	}
+}
+
+/*
+**	for "int	lowest[3]" below:
+**	lowest[0] = lowest value
+**	lowest[1] = y;
+**	lowest[2] = x;
+*/
+
 int			place_piece(t_mapinfo *info)
 {
-	int	y;
-	int	x;
+	int			y;
+	int			x;
+	int			lowest[3];
 
+	lowest[0] = 100000;
 	y = -info->p_hei - 1;
 	while (++y < info->height)
 	{
@@ -68,11 +111,13 @@ int			place_piece(t_mapinfo *info)
 		while (++x < info->width)
 		{
 			if (is_safe(info, y, x))
-			{
-					ft_printf("%d %d\n", y, x);
-					return (1);
-			}
+				update_lowest(lowest, info, y, x);
 		}
+	}
+	if (lowest[0] != 100000)
+	{
+		ft_printf("%d %d\n", lowest[1], lowest[2]);
+		return (1);
 	}
 	ft_printf("-1 -1\n");
 	return (0);

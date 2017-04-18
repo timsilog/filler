@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/13 17:00:03 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/17 17:09:02 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ static void			play_the_game(t_mapinfo *info)
 			if (line[0] == 'P' && line[1] == 'i')
 			{
 				read = 1;
-				print_heat(info);
-				sleep(3);
+				//print_heat(info);
 			}
 		}
 		if (!place_piece(info))
