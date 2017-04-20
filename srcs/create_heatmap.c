@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 16:46:15 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/17 18:51:06 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/19 17:27:34 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		is_enemy(t_mapinfo *info, int y, int x)
 	return (0);
 }
 
-static int		find_closest_dist(t_mapinfo *info, int hy, int hx)
+/*static int		find_closest_dist(t_mapinfo *info, int hy, int hx)
 {
 	int		dist;
 	int		closest;
@@ -57,16 +57,39 @@ static int		find_closest_dist(t_mapinfo *info, int hy, int hx)
 		}
 	}
 	return (closest);
-}
+}*/
 
-static void		update_heat(t_mapinfo *info, int mode, int new, int old)
+static int		add_heat(t_mapinfo *info, int new, int old)
 {
-	if (mode == 1)
-	{
+	int	i;
+	int	j;
+	int	flag;
 
+	flag = 0;
+	if (new < 0)
+		new = -new;
+	i = -1;
+	while (++i < info->height)
+	{
+		j = -1;
+		while (++j < info->width)
+		{
+			if (j + 1 < info->width && info->heatmap[i][j + 1] == old && info->heatmap[i][j] == 10)
+			{
+				info->heatmap[i][j] = new;
+				flag = 1;
+			}
+			if (i + 1 < info->height && info->heatmap[i + 1][j] == old && info->heatmap[i][j] == 10)
+			{
+				info->heatmap[i][j] = new;
+				flag = 1;
+			}
+		}
+		//i++;
 	}
+	return (flag);
 }
-static void		update_heat_init(t_mapinfo *info, int enemy)
+static void		update_heat(t_mapinfo *info, int mode)
 {
 	int	i;
 	int	j;
@@ -77,33 +100,45 @@ static void		update_heat_init(t_mapinfo *info, int enemy)
 		j = -1;
 		while (++j < info->width)
 		{
-			if (enemy)
+			if (mode == 1)
 			{
 				if (is_enemy(info, i, j))
 					info->heatmap[i][j] = 0;
+				else
+					info->heatmap[i][j] = 10;
 			}
-			else
+			else if (mode == 0)
 			{
-				if (!is_enemy(info, i, j))
+				if (info->heatmap[i][j] == 10)
 					info->heatmap[i][j] = 0;
 			}
 		}
 	}
 }
+
 void			create_heatmap(t_mapinfo *info)
 {
-	float	distance;
+	/*int		distance;
 	int		x;
-	int		y;
+	int		y;*/
 	int		heat;
 
-	heat = info->height > info->width ? info->height - 3: info->width - 3;
-	update_heat_init(info, 1);
-	while (1)
+	heat = 0;
+	update_heat(info, 1);
+	while (++heat < 4)
 	{
-		if !(update_heat(info, heat, ))
+		if (!(add_heat(info, heat, heat - 1)))
 			break ;
 	}
+	if (--heat == 3)
+	{
+		while (--heat > 0)
+		{
+			if (!(add_heat(info, heat, heat + 1)))
+				break ;
+		}
+	}
+	update_heat(info, 0);
 	/*y = -1;
 	while (++y < info->height)
 	{
