@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:39:25 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/19 17:20:10 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/20 16:46:00 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	is_safe(t_mapinfo *info, int y, int x)
 	return (1);
 }
 
-/*static int	get_heat_sum(t_mapinfo *info, int y, int x)
+static void	update_highest(int highest[3], t_mapinfo *info, int y, int x)
 {
 	int	i;
 	int	j;
@@ -74,36 +74,28 @@ static int	is_safe(t_mapinfo *info, int y, int x)
 				sum += info->heatmap[i + y][j + x];	
 		}
 	}
-	return (sum);
+	if (sum > highest[0])
+	{
+		highest[0] = sum;
+		highest[1] = y;
+		highest[2] = x;
+	}
 }
 
-static void	update_lowest(int lowest[3], t_mapinfo *info, int y, int x)
-{
-	int	temp;
-
-	temp = get_heat_sum(info, y, x);
-	if (temp < lowest[0])
-	{
-		lowest[0] = temp;
-		lowest[1] = y;
-		lowest[2] = x;
-	}
-}*/
-
 /*
-**	for "int	lowest[3]" below:
-**	lowest[0] = lowest value
-**	lowest[1] = y;
-**	lowest[2] = x;
+**	for "int	highest[3]" below:
+**	highest[0] = highest sum from heatmap
+**	highest[1] = y;
+**	highest[2] = x;
 */
 
 int			place_piece(t_mapinfo *info)
 {
 	int			y;
 	int			x;
-	int			lowest[3];
+	int			highest[3];
 
-	lowest[0] = 100000;
+	highest[0] = -1;
 	y = -info->p_hei - 1;
 	while (++y < info->height)
 	{
@@ -111,19 +103,15 @@ int			place_piece(t_mapinfo *info)
 		while (++x < info->width)
 		{
 			if (is_safe(info, y, x))
-			{
-				ft_printf("%d %d\n", y, x);
-				sleep(3);
-				return (1);
-				//update_lowest(lowest, info, y, x);
-			}
+				update_highest(highest, info, y, x);
 		}
 	}
-	/*if (lowest[0] != 100000)
+	if (highest[0] != -1)
 	{
-		ft_printf("%d %d\n", lowest[1], lowest[2]);
+		ft_printf("%d %d\n", highest[1], highest[2]);
+		//sleep(1);
 		return (1);
-	}*/
+	}
 	ft_printf("-1 -1\n");
 	return (0);
 }
