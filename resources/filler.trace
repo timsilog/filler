@@ -1,4 +1,6 @@
-seed = 1138
-../tjose.filler won
+seed = 4540
+O: error on input
+../tjose.filler: Segfault at 0
+players/abanlin.filler won
 Score:
-1685AGAINST274
+0AGAINST141

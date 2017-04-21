@@ -6,7 +6,7 @@
 #    By: tjose <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/06 15:16:08 by tjose             #+#    #+#              #
-#    Updated: 2017/04/13 16:07:35 by tjose            ###   ########.fr        #
+#    Updated: 2017/04/20 23:11:44 by tjose            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRCFILES = main.c \
 		   place_piece.c \
 		   let_it_go.c \
 		   create_heatmap.c \
+		   player_validation.c \
+		   draw_chase.c \
 		   debug.c
 SRCDIR = ./srcs/
 OBJDIR = ./objs/

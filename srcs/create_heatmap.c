@@ -6,30 +6,11 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 16:46:15 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/20 17:45:06 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/20 23:12:04 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-/*
-** Calculate distance from every single point to nearest opposing character
-*/
-
-static int		is_enemy(t_mapinfo *info, int y, int x)
-{
-	if (info->player_number == 1)
-	{
-		if (info->map[y][x] == 'x' || info->map[y][x] == 'X')
-			return (1);
-	}
-	else if (info->player_number == 2)
-	{
-		if (info->map[y][x] == 'o' || info->map[y][x] == 'O')
-			return (1);
-	}
-	return (0);
-}
 
 /*static int		find_closest_dist(t_mapinfo *info, int hy, int hx)
 {
@@ -135,7 +116,7 @@ void			create_heatmap(t_mapinfo *info)
 				break ;
 		}
 	}
-	draw_chase(info)
+	draw_chase(info);
 	update_heat(info, 0);
 	/*y = -1;
 	while (++y < info->height)

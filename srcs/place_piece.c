@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:39:25 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/20 16:46:00 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/20 23:46:50 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int			place_piece(t_mapinfo *info)
 	if (highest[0] != -1)
 	{
 		ft_printf("%d %d\n", highest[1], highest[2]);
-		//sleep(1);
+		sleep(1);
 		return (1);
 	}
 	ft_printf("-1 -1\n");
