@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:51 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/13 16:59:38 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/21 19:37:14 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int	create_maps(t_mapinfo *info)
 	while (++i < info->height)
 	{
 		info->map[i] = (char*)malloc(sizeof(char) * info->width + 1);
-		info->heatmap[i] = (char*)malloc(sizeof(char) * info->width + 1);	
-		if (!info->map[i] || !info->heatmap[i])	
+		info->heatmap[i] = (char*)malloc(sizeof(char) * info->width + 1);
+		if (!info->map[i] || !info->heatmap[i])
 			return (0);
 	}
 	return (1);
@@ -82,7 +82,7 @@ static void	get_player_num(char *line, t_mapinfo *info)
 		info->player_number = 2;
 }
 
-int			read_info(char *line, t_mapinfo *info)
+int			read_info(char *line, t_mapinfo *info, int *read)
 {
 	static int i;
 
@@ -105,6 +105,7 @@ int			read_info(char *line, t_mapinfo *info)
 		if (!get_piece(line, info))
 			return (0);
 		create_heatmap(info);
+		*read = 1;
 	}
 	return (1);
 }

@@ -6,38 +6,27 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 16:46:15 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/20 23:12:04 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/21 19:37:34 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-/*static int		find_closest_dist(t_mapinfo *info, int hy, int hx)
+static void		print_heat(t_mapinfo *info)
 {
-	int		dist;
-	int		closest;
-	int		x;
-	int		y;
+	int i;
+	int j;
 
-	closest = 1000000;
-	y = -1;
-	while (++y < info->height)
+	i = -1;
+	ft_putstr_fd("HEAT MAP\n", 2);
+	while (++i < info->height)
 	{
-		x = -1;
-		while (++x < info->width)
-		{
-			if (is_enemy(info, y, x))
-			{
-				dist = ft_sqrt(((x - hx) * (x - hx)) + ((y - hy) * (y - hy)));
-				if (dist == 0)
-					return (0);
-				if (dist < closest)
-					closest = dist;
-			}
-		}
+		j = -1;
+		while (++j < info->width)
+			ft_putstr_fd(ft_itoa((int)info->heatmap[i][j]), 2);
+		ft_putstr_fd("\n", 2);
 	}
-	return (closest);
-}*/
+}
 
 static int		add_heat(t_mapinfo *info, int new, int old)
 {
@@ -96,9 +85,6 @@ static void		update_heat(t_mapinfo *info, int mode)
 
 void			create_heatmap(t_mapinfo *info)
 {
-	/*int		distance;
-	int		x;
-	int		y;*/
 	int		heat;
 
 	heat = 0;
@@ -118,16 +104,5 @@ void			create_heatmap(t_mapinfo *info)
 	}
 	draw_chase(info);
 	update_heat(info, 0);
-	/*y = -1;
-	while (++y < info->height)
-	{
-		x = -1;
-		while (++x < info->width)
-		{
-			distance = find_closest_dist(info, y, x);
-			distance = distance == 2 ? distance + 3 : distance;
-			distance = distance == 1 ? distance + 3 : distance;
-			info->heatmap[y][x] = distance;
-		}
-	}*/
+	print_heat(info);
 }

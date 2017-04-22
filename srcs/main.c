@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/19 16:44:34 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/21 19:31:14 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,10 @@ static void			play_the_game(t_mapinfo *info)
 		while (!read)
 		{
 			get_next_line(0, &line);
-			if (!read_info(line, info))
+			if (!read_info(line, info, &read))
 			{
 				ft_printf("Map read error\n");
 				return ;
-			}
-			if (line[0] == 'P' && line[1] == 'i')
-			{
-				read = 1;
-				print_heat(info);///////////////////////////
 			}
 		}
 		if (!place_piece(info))

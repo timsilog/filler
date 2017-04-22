@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:39:25 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/20 23:46:50 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/21 19:38:04 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	is_safe(t_mapinfo *info, int y, int x)
 					return (0);
 			}
 		}
-
 	}
 	if (num_touching != 1)
 		return (0);
@@ -71,7 +70,7 @@ static void	update_highest(int highest[3], t_mapinfo *info, int y, int x)
 		while (++j < info->p_wid)
 		{
 			if (info->piece[i][j] == '*')
-				sum += info->heatmap[i + y][j + x];	
+				sum += info->heatmap[i + y][j + x];
 		}
 	}
 	if (sum > highest[0])
@@ -109,7 +108,6 @@ int			place_piece(t_mapinfo *info)
 	if (highest[0] != -1)
 	{
 		ft_printf("%d %d\n", highest[1], highest[2]);
-		sleep(1);
 		return (1);
 	}
 	ft_printf("-1 -1\n");
