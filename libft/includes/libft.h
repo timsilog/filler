@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 11:06:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/03/09 14:07:31 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/24 16:06:48 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ typedef struct		s_files
 	char			*leftover;
 	struct s_files	*next;
 }					t_files;
+typedef enum
+{
+	black,
+	red,
+	green,
+	yellow,
+	blue,
+	magenta,
+	cyan,
+	white,
+	lgray,
+	lred,
+	lgreen,
+	lyellow,
+	lblue,
+	lmagenta,
+	lcyan,
+	lwhite,
+}					t_color;
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
@@ -43,6 +62,7 @@ void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
+void				ft_putchar_color_fd(char c, t_color color, int fd);
 void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr(int n);
