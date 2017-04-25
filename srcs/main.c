@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/21 19:31:14 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/25 15:27:58 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void			play_the_game(t_mapinfo *info)
 		}
 		free_the_piece(info);
 		read = 0;
+		//sleep(1);
 	}
 }
 

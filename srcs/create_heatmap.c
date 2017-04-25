@@ -6,27 +6,11 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 16:46:15 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/21 19:37:34 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/25 15:07:03 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-static void		print_heat(t_mapinfo *info)
-{
-	int i;
-	int j;
-
-	i = -1;
-	ft_putstr_fd("HEAT MAP\n", 2);
-	while (++i < info->height)
-	{
-		j = -1;
-		while (++j < info->width)
-			ft_putstr_fd(ft_itoa((int)info->heatmap[i][j]), 2);
-		ft_putstr_fd("\n", 2);
-	}
-}
 
 static int		add_heat(t_mapinfo *info, int new, int old)
 {

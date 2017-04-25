@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:32:08 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/21 19:30:50 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/25 15:06:30 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,5 @@ void			free_the_piece(t_mapinfo *info);
 void			free_the_map(t_mapinfo *info);
 void			create_heatmap(t_mapinfo *info);
 void			draw_chase(t_mapinfo *info);
-
-//debug stuff:
-/*void	print_piece(t_mapinfo *info);
-void	print_map(t_mapinfo *info);
-void	print_heat(t_mapinfo *info);*/
+void			print_heat(t_mapinfo *info);
 #endif
