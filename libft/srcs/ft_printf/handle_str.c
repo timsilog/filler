@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 13:53:41 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/22 14:32:12 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/26 15:48:42 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int			handle_str(va_list tags, t_mods *mods)
 	mods->flags.show_space = 0;
 	mods->flags.hash = 0;
 	mods->length = 0;
-	size = mods->width < (int)ft_strlen(new_str) ? ft_strlen(new_str) : mods->width;
+	size = mods->width < (int)ft_strlen(new_str) ?
+		ft_strlen(new_str) : mods->width;
 	if (!(ans = malloc(sizeof(char) * size + 1)))
 		return (-1);
 	mods->flags.left_justify ? place_left(mods, &ans, size, new_str) :

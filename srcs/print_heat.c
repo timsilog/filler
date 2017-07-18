@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 14:36:28 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/25 15:26:17 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/26 14:01:46 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		print_heat(t_mapinfo *info)
 	int	newlines;
 
 	newlines = -1;
-	while(++newlines < 250)
+	while (++newlines < 250)
 		ft_putstr_fd("\n", 2);
 	y = -1;
 	while (++y < info->height)

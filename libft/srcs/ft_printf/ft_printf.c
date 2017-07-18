@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/22 14:35:11 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/26 16:02:04 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	find_handle(va_list tags, t_mods *mods)
 		return (handle_str(tags, mods));
 	else if (mods->specifier)
 		return (handle_nospec(mods));
-	return (0);
+	return (-1);
 }
 
 static int	print_string(const char *format, int count,

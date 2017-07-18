@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/22 14:30:04 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/26 15:58:01 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char		*go_wide(va_list tags)
 	i = 0;
 	chr = va_arg(tags, wchar_t);
 	if (!(str = malloc(sizeof(char) * ft_wclen(chr) + 1)))
-		return (NULL);
+		exit(-1);
 	ft_wctomb(str, chr);
 	return (str);
 }
@@ -60,11 +60,7 @@ int				handle_char(va_list tags, t_mods *mods)
 	int		size;
 
 	if (mods->length == l)
-	{
 		str_c = go_wide(tags);
-		if (!str_c)
-			return (-1);
-	}
 	else
 		str_c = just_one(tags);
 	adjust_cmods(mods, str_c);

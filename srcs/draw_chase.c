@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 16:50:35 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/21 18:26:53 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/26 15:44:22 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	find_first(int player[2], t_mapinfo *info, int enemy)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = -1;
 	while (++i < info->height)

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:32:08 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/25 15:06:30 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/26 15:44:48 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_mapinfo
 	int			width;
 	int			p_wid;
 	int			p_hei;
+	int			im_above;
 	char		**map;
 	char		**piece;
 	char		**heatmap;

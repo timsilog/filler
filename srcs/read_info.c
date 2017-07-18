@@ -6,16 +6,21 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 17:00:51 by tjose             #+#    #+#             */
-/*   Updated: 2017/04/21 19:37:14 by tjose            ###   ########.fr       */
+/*   Updated: 2017/04/26 16:18:54 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static int	create_maps(t_mapinfo *info)
+static int	get_map_size(char *line, t_mapinfo *info)
 {
-	int	i;
+	int i;
 
+	i = 8;
+	info->height = ft_atoi(&line[i]);
+	while (!ft_is_wp(line[i]))
+		i++;
+	info->width = ft_atoi(&line[++i]);
 	info->heatmap = (char**)malloc(sizeof(char*) * info->height);
 	info->map = (char**)malloc(sizeof(char*) * info->height);
 	if (!info->heatmap || !info->map)
@@ -29,28 +34,6 @@ static int	create_maps(t_mapinfo *info)
 			return (0);
 	}
 	return (1);
-}
-
-static int	get_map_size(char *line, t_mapinfo *info)
-{
-	if (line[8] == '1' && line[9] == '5')
-	{
-		info->height = 15;
-		info->width = 17;
-	}
-	else if (line[8] == '1' && line[9] == '0')
-	{
-		info->height = 100;
-		info->width = 99;
-	}
-	else if (line[8] == '2')
-	{
-		info->height = 24;
-		info->width = 40;
-	}
-	else
-		return (0);
-	return (create_maps(info));
 }
 
 static int	get_piece(char *line, t_mapinfo *info)

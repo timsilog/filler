@@ -6,7 +6,7 @@
 #    By: tjose <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/06 15:16:08 by tjose             #+#    #+#              #
-#    Updated: 2017/04/25 15:05:52 by tjose            ###   ########.fr        #
+#    Updated: 2017/05/05 18:19:36 by tjose            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCFILES = main.c \
 		   create_heatmap.c \
 		   player_validation.c \
 		   draw_chase.c \
-		   print_heat.c
+		   print_heat.c \
+		   get_next_line.c
 SRCDIR = ./srcs/
 OBJDIR = ./objs/
 INCDIR = ./includes/
@@ -42,7 +43,9 @@ clean:
 	make -C ./libft clean
 	rm -fr $(OBJDIR)
 
-fclean: clean
+fclean:
+	make -C ./libft fclean
+	rm -fr $(OBJDIR)
 	rm -f $(NAME)
 
 re: fclean all
